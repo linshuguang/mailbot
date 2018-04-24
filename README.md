@@ -10,12 +10,8 @@ finished client mode
 2018.1.10
 
 ## DEMO
-Demo1:
+
 <img src="https://github.com/linshuguang/mailbot/blob/master/cases/demo/20171219.JPG" height = "250" alt="demo1" align=left />
-
-
-Demo2:
-<img src="https://github.com/linshuguang/mailbot/blob/master/cases/demo/20171215.JPG" height = "250" alt="demo2" align=left />
 
 
 
