@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="mailbot.log" />
+        <param name="DatePattern" value=".yyyyMMdd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-5p %d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %l [%m]%n" />
+        </layout>
+    </appender>
+
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <param name="threshold" value="debug" />
+        <param name="target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-5p %d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %l [%m]%n" />
+        </layout>
+    </appender>
+
+    <appender name="stderr" class="org.apache.log4j.ConsoleAppender">
+        <param name="threshold" value="error" />
+        <param name="target" value="System.err"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d [%t][%F:%L] : %m%n" />
+        </layout>
+    </appender>
+
+    <logger name="com.me" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="file" />
+        <appender-ref ref="stdout" />
+        <appender-ref ref="stderr" />
+    </logger>
+
+    <logger name="org.springframework" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="stdout" />
+        <appender-ref ref="stderr" />
+    </logger>
+
+    <root>
+        <priority value="debug"></priority>
+        <!--appender-ref ref="stderr" />
+        <appender-ref ref="stdout" /-->
+    </root>
+
+</log4j:configuration>

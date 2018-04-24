@@ -1,0 +1,56 @@
+<html>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<script>
+var tag='delete it';
+function autoRowSpan(tb,row,col)
+{
+        var lastValue="";
+        var value="";
+        var pos=1;
+        var n = tb.rows.length;
+        for(var i=row;i<n;i++)
+        {
+                var j = col;
+                value = tb.rows[i].cells[j].innerHTML;
+                if(lastValue == value){
+                    tb.rows[i].cells[j].myText=tag;
+                    tb.rows[i-pos].cells[j].rowSpan = tb.rows[i-pos].cells[j].rowSpan+1;
+                    pos++;
+                }else{
+                    lastValue = value;
+                    pos=1;
+                }
+        }
+}
+
+function RemoveAll (o) {
+        var t = false;
+        for(var i=0; i<o.cells.length;i++)
+        {
+                if(o.cells[i].myText==tag){
+                    o.deleteCell (i);
+                    t=true;
+                    break;
+                }
+        }
+        return t;
+}
+function autoDelRow(tb)
+{
+        for(var i=0;i<tb.rows.length;i++)
+        {while(RemoveAll(tb.rows[i]));}
+}
+window.onload=function(){
+
+            var tb=document.getElementsByTagName('table')[0];
+%s
+            autoDelRow(tb);
+            console.log(tb);}
+</SCRIPT>
+<BODY >
+<h1>我的第一个页面</h1>
+<p>我的第一个段落。</p>
+
+%s
+</BODY>
+</HTML>

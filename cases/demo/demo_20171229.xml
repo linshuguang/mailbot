@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+    <subject>
+        <prefix>[数据平台]</prefix>
+        <title>每日基础数据报表</title>
+        <postfix>%CURDATE%</postfix>
+    </subject>
+    <recipient>
+        <email>kenya@xxxx.com</email>
+    </recipient>
+    <content>
+        <record>
+            <model type="text" >
+                <value>hello world</value>
+            </model>
+            <view type="echo">
+                <template>template1</template>
+            </view>
+        </record>
+        <record>
+            <model type="sql" >
+                <value>select user,host from user</value>
+            </model>
+            <view type="html">
+                <template>template444</template>
+            </view>
+        </record>
+        <!--record>
+            <model type="sql" >
+                <value>select user,count(*) from mysql.user group by user</value>
+            </model>
+            <view type="pie">
+                <template>pie</template>
+            </view>
+        </record-->
+    </content>
+
+
+</config>
+

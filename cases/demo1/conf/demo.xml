@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--?xml-stylesheet type="text/xsl" href="t.xsl"?-->
+<config>
+    <subject>
+        <prefix>[数据平台]</prefix>
+        <title>每日基础数据报表</title>
+        <postfix>%CURDATE%</postfix>
+    </subject>
+
+    <recipient>
+        <email type='test'>kenya@xxxxx.com</email>
+    </recipient>
+
+    <content>
+        <record>
+            <model type="text">
+                <value>hello world</value>
+             </model>
+            <view type="echo" />
+        </record>
+
+        <record >
+            <model type="sql" >
+                <value>select * from user</value>
+            </model>
+            <view type="html" />
+        </record>		
+    </content>
+
+</config>
+

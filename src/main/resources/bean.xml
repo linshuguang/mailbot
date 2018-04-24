@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd" >
+
+    <context:annotation-config/>
+    <!--context:property-placeholder location="classpath:foo.properties" /-->
+    <context:property-placeholder location="file:conf/demo.properties" />
+    <bean id="mySubject" class="com.mail.Subject">
+        <property name="prefix" value ="prefix ok"/>
+        <property name="title" value="title ok"/>
+        <property name="postfix" value="postfix ok" />
+    </bean>
+
+
+    <bean id="myRecipient" class="com.mail.Recipient">
+        <property name="recipient">
+            <set>
+                <value>kenya@xxxxxxxxx.com</value>
+            </set>
+        </property>
+    </bean>
+
+
+    <bean id="myContent" class="com.mail.Content">
+        <property name="records">
+            <list>
+                <bean class="com.mail.Record" >
+                    <property name="render" >
+                        <null />
+                    </property>
+                    <property name="executor" >
+                        <bean class="com.executor.EchoExecutor" >
+                            <property name="value" >
+                                <value>hello world</value>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+
+                <bean class="com.mail.Record" >
+                    <property name="render" >
+                        <null />
+                    </property>
+                    <property name="executor" >
+                        <bean class="com.executor.SQLFileExecutor" >
+                            <property name="path" >
+                                <value>conf/basic_daily_report_2_3_register_info.sql</value>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+
+
+                <bean class="com.mail.Record" >
+                    <property name="render" >
+                        <bean class="com.render.Render" >
+                            <property name="param" >
+                                <map>
+                                    <entry key="Key 1" value="1" />
+                                </map>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="executor" >
+                        <bean class="com.executor.SQLExecutor" >
+                            <property name="sql" >
+                                <value>select * from sync.ip_mapping limit 10</value>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <property name="driverClassName" value="${db.driver}" />
+        <property name="url" value="${db.url}" />
+        <property name="username" value="${db.user}" />
+        <property name="password" value="${db.password}" />
+    </bean>
+
+    <bean id="myEmail" class="com.mail.EMail">
+        <property name="subject" >
+            <ref bean="mySubject"/>
+        </property>
+
+        <property name="recipient" >
+            <ref bean="myRecipient"/>
+        </property>
+
+        <property name="content" >
+            <ref bean="myContent"/>
+        </property>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,25 @@
+.*
+!.gitignore
+*.class
+/bin
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+#package files
+target
+*.xml.bak
+*.iml
+.idea
+
+#demo file
+AlexDemo.java
+
+release/
+
+
+#application*.xml
+bak/
+*.log*

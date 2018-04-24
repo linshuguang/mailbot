@@ -1,0 +1,8 @@
+<decorators defaultdir="/decorators">
+    <excludes>
+        <pattern>/resources/*</pattern>
+    </excludes>
+    <decorator name="default" page="index.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>

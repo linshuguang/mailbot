@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--?xml-stylesheet type="text/xsl" href="t.xsl"?-->
+<config>
+    <subject>
+        <prefix>[数据平台]</prefix>
+        <title>每日基础数据报表</title>
+        <postfix>%CURDATE%</postfix>
+    </subject>
+
+    <recipient>
+        <email type='test'>xxxxx@xxxxxx.com</email>
+    </recipient>
+
+    <content>
+        <record>
+            <model type="text">
+                <value>hello world</value>
+                <rKey>ds1</rKey>
+            </model>
+            <view type="echo">
+                <template>template1</template>
+            </view>
+        </record>
+
+        <record >
+            <model type="sql" >
+                <value>select * from user</value>
+            </model>
+            <view type="html">
+                <template>template444</template>
+            </view>
+        </record>
+        <record >
+            <model type="sql" >
+                <rKey>ds1</rKey>
+                <value>select 'hello world 2'</value>
+            </model>
+            <view type="html">
+                <template>template444</template>
+                <render>html</render>
+            </view>
+        </record>
+    </content>
+
+</config>
+

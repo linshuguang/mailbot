@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd
+    http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
+       default-lazy-init="false">
+
+    <!-- 自动扫描 -->
+    <context:annotation-config />
+    <!--context:component-scan base-package="com.me">
+    </context:component-scan-->
+    <context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.properties,
+                classpath*:/application.test.properties" />
+
+    <!--bean id="myResourceManager" class="com.me.resource.SystemResourceManager">
+    </bean-->
+
+    <bean id="myResourceManager" class="com.me.resource.SimpleResourceManager">
+        <constructor-arg>
+            <map>
+                <entry key="ds1">
+                    <bean class="com.me.resource.DBResource">
+                        <constructor-arg  value="com.mysql.jdbc.Driver" />
+                        <constructor-arg  value="jdbc:mysql://${host}:3306/mysql" />
+                        <constructor-arg  value="${user}" />
+                        <constructor-arg  value="" />
+                    </bean>
+                </entry>
+            </map>
+        </constructor-arg>
+        <property name="defKey" value="ds1" />
+    </bean>
+
+    <bean id="myConsumerManager" class="com.me.consumer.SimpleConsumerManager">
+        <constructor-arg>
+            <bean class="com.me.consumer.EMailConsumer">
+                <property name="host" value="${mailhost}}" />
+                <property name="port" value="25" />
+                <property name="user" value="${user}" />
+                <property name="password" value="${password}}" />
+                <property name="from" value="robot" />
+            </bean>
+        </constructor-arg>
+
+    </bean>
+
+
+
+</beans>

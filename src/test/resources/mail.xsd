@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+
+    <xs:element name='config'>
+        <xs:complexType>
+            <xs:all >
+               <xs:element name='subject' type='SubjectType' minOccurs='1' maxOccurs='1' />
+                <xs:element name='recipient' type='RecipientType' minOccurs='1' maxOccurs='1' />
+                <xs:element name='content' type='ContentType' minOccurs='1' maxOccurs='1' />
+                <!--xs:element name='resources' type='ResourcesType' minOccurs='0' maxOccurs='1' />
+                <xs:element name='context' type='ContextType' minOccurs='1' maxOccurs='1' /-->
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="SubjectType">
+        <xs:all>
+            <xs:element name="prefix" type="xs:string"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="postfix" type="xs:string"/>
+        </xs:all>
+    </xs:complexType>
+
+
+    <xs:complexType name="RecipientType">
+        <xs:sequence>
+            <xs:element name='email' type='EmailType' minOccurs='1' maxOccurs='unbounded' />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:attributeGroup name="EmailAttributes">
+        <xs:attribute name="type" type="xs:string" use="optional"/>
+    </xs:attributeGroup>
+
+    <xs:complexType name="EmailType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="ContentType">
+        <xs:sequence>
+            <xs:element name='record' type='RecordType' minOccurs='0' maxOccurs='unbounded' />
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="RecordType">
+        <xs:all>
+            <xs:element name='model' type='ModelType' minOccurs='1' maxOccurs='1' />
+            <xs:element name='view' type='ViewType' minOccurs='1' maxOccurs='1' />
+            <!--xs:any minOccurs='0' maxOccurs='unbounded' processContents='lax'/-->
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ModelType">
+        <xs:sequence>
+            <xs:any minOccurs='0' maxOccurs='unbounded' processContents='lax'/>
+        </xs:sequence>
+        <xs:attribute name='type' type='xs:string'/>
+        <xs:attribute name='test' type='xs:string' use="optional"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="ViewType">
+        <xs:sequence>
+            <xs:any  minOccurs='0' maxOccurs='unbounded' processContents='lax'/>
+        </xs:sequence>
+        <xs:attribute name='type' type='xs:string'/>
+    </xs:complexType>
+
+    <xs:complexType name="DummyType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="ResourcesType">
+        <xs:sequence>
+            <xs:element name='resource' type='ResourceType' minOccurs='0' maxOccurs='unbounded' />
+        </xs:sequence>
+        <xs:attribute name='defaultResource' type='xs:string' use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="ResourceType">
+        <xs:sequence>
+            <xs:any minOccurs='0' maxOccurs='unbounded' processContents='lax'/>
+        </xs:sequence>
+        <xs:attribute name='rid' type='xs:string'/>
+        <xs:attribute name='type' type='xs:string'/>
+    </xs:complexType>
+
+    <xs:complexType name="ContextType">
+        <xs:sequence>
+            <xs:any minOccurs='0' maxOccurs='unbounded' processContents='lax'/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+</xs:schema>
